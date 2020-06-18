@@ -2,7 +2,7 @@
 <nav class="navbar navbar-dark bg-dark sticky-top">
   <a class="navbar-brand" href="#">
     <img src="http://toonups.com/Images/happy_sun.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    Weather Handlebar
+    Weather Demon
   </a>
     <form class="form-inline" action="/" method="GET">
     <input class="form-control mr-sm-2" type="search" name="city" placeholder="Enter a city name" aria-label="Search">
@@ -11,20 +11,27 @@
 </nav>
 
 <h1>{{title}}</h1>
-<p>Welcome Smith to {{title}}.
+<p>Welcome to {{title}}.
 </p>
-
-{{!-- 
-  <form action="/" method="GET">
-    <input name="city" placeholder="Enter a city name" required>
-    <input type="submit" value="Get Forecast">
-  </form> --}}
-
 
 
   {{#if forecast}}
+  <p>Weather at {{location}}
+</p>
+
   <ul>
-<li>Temperature: {{round forecast.temp}}</li>
-<li>Description: {{upper forecast.weather.0.description}}</li>
+<li>Temperature: {{round currentForecast.temp}}°C</li>
+<li>Description: {{upper currentForecast.weather.0.description}} <img src="http://openweathermap.org/img/w/{{currentForecast.weather.0.icon}}.png"/></li>
   </ul>
+
+  <div style="display:flex; justify-content:center">
+  {{#each hourlyForecast}}
+  <div style="display:flex; flex-direction:column; margin-right: 10px">
+    <p>{{moment dt}}</p>
+    <p>{{round temp}}°C</p>
+    <p>{{upper weather.0.description}}</p>
+    <p><img src="http://openweathermap.org/img/w/{{weather.0.icon}}.png"/></p>
+  </div>
+  {{/each}}
+  </div>
   {{/if}}

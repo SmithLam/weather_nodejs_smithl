@@ -11,6 +11,7 @@ var usersRouter = require("./routes/users");
 var app = express();
 
 var hbs = require("hbs");
+let Moment = require('moment')
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -29,6 +30,9 @@ hbs.registerHelper("round", function (num) {
 });
 hbs.registerHelper("upper", function (aString) {
   return (aString).toUpperCase();
+});
+hbs.registerHelper("moment", function (aString) {
+  return Moment.unix(aString).calendar()
 });
 
 hbs.registerPartial("partial_name", "partial value");
